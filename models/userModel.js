@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const JWT = require("jsonwebtoken");
 const cookie = require("cookie");
-
+const dotenv=require("dotenv");
+dotenv.config();
 //models
 const userSchema = new mongoose.Schema({
   username: {
@@ -50,12 +51,12 @@ userSchema.methods.getSignedToken = function (res) {
   const acccesToken = JWT.sign(
     { id: this._id },
     process.env.JWT_ACCESS_SECRET,
-    { expiresIn: process.env.JWT_ACCESS_EXPIREIN }
+    { expiresIn:process.env.JWT_ACCESS_EXPIREIN }
   );
   const refreshToken = JWT.sign(
     { id: this._id },
     process.env.JWT_REFRESH_TOKEN,
-    { expiresIn: process.env.JWT_REFRESH_EXIPREIN }
+    { expiresIn: process.env.JWT_REFRESH_EXPIREIN }
   );
   res.cookie("refreshToken", `${refreshToken}`, {
     maxAge: 86400 * 7000,

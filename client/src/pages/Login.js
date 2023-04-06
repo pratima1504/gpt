@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Homepage from "./Homepage";
 import {
   Box,
   Typography,
@@ -27,10 +28,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/v1/auth/login", { email, password });
+      await axios.post("https://reqres.in/api/v1/auth/login", { email, password });
       toast.success("Login Successfully");
       localStorage.setItem("authToken", true);
-      navigate("/");
+      navigate("/Homepage");
     } catch (err) {
       console.log(error);
       if (err.response.data.error) {

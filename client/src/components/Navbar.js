@@ -12,7 +12,7 @@ const Navbar = () => {
   //handle logout
   const handleLogout = async () => {
     try {
-      await axios.post("/api/v1/auth/logout");
+      await axios.post("https://reqres.in/api/v1/auth/logout");
       localStorage.removeItem("authToken");
       toast.success("logout successfully ");
       navigate("/login");
@@ -33,7 +33,7 @@ const Navbar = () => {
       </Typography>
       {loggedIn ? (
         <>
-          <NavLink to="/" p={1}>
+          <NavLink to="/Homepage" p={1}>
             Home
           </NavLink>
           <NavLink to="/login" onClick={handleLogout} p={1}>
